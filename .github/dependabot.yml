@@ -1,9 +1,25 @@
 version: 2
 updates:
+  # Go modules
   - package-ecosystem: gomod
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 5
+
+  # npm (JS/TS) — one entry per package.json location
+  - package-ecosystem: npm
+    directory: /web
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "deps"
     cooldown:
@@ -13,9 +29,10 @@ updates:
       semver-patch-days: 5
 
   - package-ecosystem: npm
-    directory: /web
+    directory: /sdks/sdk-typescript
     schedule:
       interval: weekly
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "deps"
     cooldown:
@@ -24,10 +41,25 @@ updates:
       semver-minor-days: 7
       semver-patch-days: 5
 
+  - package-ecosystem: npm
+    directory: /examples/daytona-openai-realtime
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 5
+
+  # Docker — one entry per directory containing a Dockerfile
   - package-ecosystem: docker
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "deps"
     cooldown:
@@ -37,15 +69,28 @@ updates:
     directory: /internal/isolation/assets
     schedule:
       interval: weekly
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "deps"
     cooldown:
       default-days: 7
 
+  - package-ecosystem: docker
+    directory: /examples/nginx-public-ui-proxy
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    cooldown:
+      default-days: 7
+
+  # GitHub Actions workflows
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "ci"
     cooldown:
